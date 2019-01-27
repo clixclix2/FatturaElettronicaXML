@@ -1,22 +1,13 @@
 <?php
 
 /**
- * Copyright (C) 2018 Taocomp s.r.l.s. <https://taocomp.com>
+ * Quetso software è derivato dal programma php-e-invoice-it <https://github.com/taocomp/php-e-invoice-it>
+ * @license GPL v3.0 <http://www.gnu.org/licenses/gpl.html>
+ * @copyright 2018 Taocomp s.r.l.s. <https://taocomp.com>
  *
- * This file is part of php-e-invoice-it.
+ * @since 2019-01-27 Creazione della libreria FatturaElettronicaXML <https://github.com/clixclix2/FatturaElettronicaXML>
+ * @author Itala Tecnologia Informatica S.r.l. <https://www.itala.net>
  *
- * php-e-invoice-it is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * php-e-invoice-it is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with php-e-invoice-it.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
@@ -143,7 +134,7 @@ abstract class AbstractDocument
 	 *
 	 * @return \DOMNodeList
 	 */
-	public function query( string $expr, $context = null, $registerNodeNS = true )
+	public function query( $expr, $context = null, $registerNodeNS = true )
 	{
 		$strpos = strpos($expr, '/');
 		
@@ -204,7 +195,7 @@ abstract class AbstractDocument
 	/**
 	 * Set filename
 	 */
-	public function setFilename( string $filename )
+	public function setFilename( $filename )
 	{
 		$this->filename = $filename;
 		return $this;
@@ -213,7 +204,7 @@ abstract class AbstractDocument
 	/**
 	 * Set destination dir (common prefix path when saving invoices)
 	 */
-	public static function setDefaultPrefixPath( string $dir )
+	public static function setDefaultPrefixPath( $dir )
 	{
 		$dir = realpath($dir);
 		
@@ -238,7 +229,7 @@ abstract class AbstractDocument
 	/**
 	 * Load a document from file
 	 */
-	protected function load( string $filename, $options = 0 )
+	protected function load( $filename, $options = 0 )
 	{
 		if (false === $this->dom->load($filename, $options)) {
 			throw new \Exception("Cannot load file '$filename'");
@@ -251,7 +242,7 @@ abstract class AbstractDocument
 	 * Load a document from string
 	 * C.C.
 	 */
-	protected function loadXML( string $xml, $options = 0 )
+	protected function loadXML( $xml, $options = 0 )
 	{
 		if (false === $this->dom->loadXML($xml, $options)) {
 			throw new \Exception("Cannot load file XML");
@@ -308,7 +299,7 @@ abstract class AbstractDocument
 	/**
 	 * Set optional destination dir for current object
 	 */
-	public function setPrefixPath( string $dir )
+	public function setPrefixPath( $dir )
 	{
 		$dir = realpath($dir);
 		
@@ -433,7 +424,7 @@ abstract class AbstractDocument
 	/**
 	 * Get value
 	 */
-	public function getValue( string $expr, $context = null )
+	public function getValue( $expr, $context = null )
 	{
 		return $this->getElement($expr, $context)->nodeValue;
 	}
@@ -442,7 +433,7 @@ abstract class AbstractDocument
 	 * Set value for a given element, if the element is unique (by tag or xpath).
 	 * Throws an exception otherwise.
 	 */
-	public function setValue( string $expr, $value, $context = null )
+	public function setValue( $expr, $value, $context = null )
 	{
 		$value = htmlspecialchars($value, ENT_XML1); // C.C.
 		$this->getElement($expr, $context)->nodeValue = $value;
@@ -453,8 +444,10 @@ abstract class AbstractDocument
 	/**
 	 * Set same value $value to all elements retrieved through $expr
 	 */
-	public function setValueToAll( string $expr, $value, $context = null )
+	public function setValueToAll( $expr, $value, $context = null )
 	{
+		$value = htmlspecialchars($value, ENT_XML1); // C.C.
+		
 		$elements = $this->query($expr, $context);
 		
 		foreach ($elements as $element) {

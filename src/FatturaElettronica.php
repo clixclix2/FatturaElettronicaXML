@@ -1,25 +1,14 @@
 <?php
 
 /**
- * Copyright (C) 2018 Taocomp s.r.l.s. <https://taocomp.com>
+ * Quetso software è derivato dal programma php-e-invoice-it <https://github.com/taocomp/php-e-invoice-it>
+ * @license GPL v3.0 <http://www.gnu.org/licenses/gpl.html>
+ * @copyright 2018 Taocomp s.r.l.s. <https://taocomp.com>
  *
- * This file is part of php-e-invoice-it.
+ * @since 2019-01-27 Creazione della libreria FatturaElettronicaXML <https://github.com/clixclix2/FatturaElettronicaXML>
+ * @author Itala Tecnologia Informatica S.r.l. <https://www.itala.net>
  *
- * php-e-invoice-it is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * php-e-invoice-it is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with php-e-invoice-it.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-namespace Taocomp\Einvoicing;
 
 class FatturaElettronica extends AbstractDocument
 {
@@ -423,7 +412,7 @@ class FatturaElettronica extends AbstractDocument
 	/**
 	 * Constructor
 	 */
-	public function __construct( string $arg )
+	public function __construct( $arg )
 	{
 		$format = strtoupper($arg);
 		
@@ -499,7 +488,7 @@ class FatturaElettronica extends AbstractDocument
 	/**
 	 * Set number of bodies (invoice lot)
 	 */
-	public function setBodyCount( int $n )
+	public function setBodyCount( $n )
 	{
 		return $this->addBody($n - 1);
 	}
@@ -512,7 +501,7 @@ class FatturaElettronica extends AbstractDocument
 	/**
 	 * Add line item
 	 */
-	public function addLineItem( int $n, $bodyIndex = 1 )
+	public function addLineItem( $n, $bodyIndex = 1 )
 	{
 		if ($n < 1) {
 			return $this;
@@ -537,7 +526,7 @@ class FatturaElettronica extends AbstractDocument
 	/**
 	 * Get line item i
 	 */
-	public function getLineItem( int $i, $bodyIndex = 1 )
+	public function getLineItem( $i, $bodyIndex = 1 )
 	{
 		$body = $this->getBody($bodyIndex);
 		return $this->getElement("DettaglioLinee[$i]", $body);
@@ -546,7 +535,7 @@ class FatturaElettronica extends AbstractDocument
 	/**
 	 * Set number of line items
 	 */
-	public function setLineItemCount( int $n, $bodyIndex = 1 )
+	public function setLineItemCount( $n, $bodyIndex = 1 )
 	{
 		return $this->addLineItem($n - 1, $bodyIndex);
 	}
