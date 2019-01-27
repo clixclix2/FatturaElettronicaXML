@@ -10,6 +10,8 @@
  *
  */
 
+require_once __DIR__ . '/AbstractDocument.php';
+
 class FatturaElettronica extends AbstractDocument
 {
 	/**
