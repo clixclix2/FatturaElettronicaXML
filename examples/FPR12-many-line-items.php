@@ -1,10 +1,8 @@
 <?php
 
-use Taocomp\Einvoicing\FatturaElettronica;
-
 try
 {
-    require_once(__DIR__ . '/../vendor/autoload.php');
+	require_once(__DIR__ . '/../src/FatturaElettronica.php');
 
     // sample data
     require_once(__DIR__ . '/data.php');

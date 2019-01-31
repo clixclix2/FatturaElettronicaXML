@@ -1,12 +1,9 @@
 <?php
 
-use \Taocomp\Einvoicing\FatturaElettronica;
-use \Taocomp\Einvoicing\EsitoCommittente;
-
 try
 {
-    require_once(__DIR__ . '/../vendor/autoload.php');
-
+	require_once(__DIR__ . '/../src/FatturaElettronica.php');
+	
     // --------------------------------------------------------------
     // Invoice
     // --------------------------------------------------------------
@@ -73,28 +70,7 @@ try
     header("Content-type: text/xml; charset=utf-8");
     echo $xml . PHP_EOL;
     
-    // --------------------------------------------------------------
-    // Notice
-    // --------------------------------------------------------------
-
-    // Create notice
-    $notice = new EsitoCommittente();
-
-    // Set some values from invoice, second body
-    $notice->setValuesFromInvoice($invoice, 2);
-
-    // Set values
-    $notice->setValue('IdentificativoSdI', 1234567);
-    $notice->setValue('Esito', EsitoCommittente::EC01);
-
-    // Set filename from invoice
-    $notice->setFilenameFromInvoice($invoice, '_EC_001');
-
-    // Save notice
-    // $notice->save();
-
-    // XML
-    $xml = $notice->asXML();
+    
 }
 catch (\Exception $e)
 {
